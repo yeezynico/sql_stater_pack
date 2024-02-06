@@ -1,0 +1,37 @@
+dans ton terminale : =>
+=> sqlite3 chinook.db 
+=> .mode column
+=> .headers on
+=> .tables
+
+1_Récupérer tous les albums
+=> SELECT * FROM albums;
+
+2_Récupérer tous les albums dont le titre contient "Great" (indice)
+=> SELECT * FROM albums WHERE title LIKE '%Great%';
+
+3_Donner le nombre total d'albums contenus dans la base (sans regarder les id bien sûr)
+=> SELECT COUNT(albumid) FROM albums;
+
+4_Supprimer tous les albums dont le nom contient "music"
+=> DELETE FROM albums WHERE title LIKE '%music%';
+
+5_Récupérer tous les albums écrits par AC/DC
+=> SELECT * FROM albums WHERE artistid = (SELECT artistid FROM artists WHERE name = "AC/DC");
+
+6_Récupérer tous les titres des albums de AC/DC
+=> SELECT title FROM albums WHERE artistid = (SELECT artistid FROM artists WHERE name = "AC/DC");
+
+7_Récupérer la liste des titres de l'album "Let There Be Rock"
+=> SELECT name FROM tracks WHERE albumid = (SELECT albumid FROM albums WHERE title = "Let There Be Rock");
+
+8_Afficher le prix de cet album ainsi que sa durée totale
+=> SELECT SUM(milliseconds) FROM tracks WHERE albumid = (SELECT albumid FROM albums WHERE title = "Let There Be Rock");
+=> SELECT SUM(unitprice) FROM tracks WHERE albumid = (SELECT albumid FROM albums WHERE title = "Let There Be Rock");
+
+9_Afficher le coût de l'intégralité de la discographie de "Deep Purple"
+=> SELECT SUM(unitprice) FROM tracks WHERE albumid IN (SELECT albumid FROM albums WHERE artistid = (SELECT artistid FROM artists WHERE name = "Deep Purple"));
+
+10_Créer l'album de ton artiste favori en base, en renseignant correctement les trois tables albums, artists et tracks
+=> INSERT INTO artists (name) VALUES ('2Pac');
+=> INSERT INTO albums (title,artistid) VALUES ('Better Dayz', (SELECT artistid FROM artists WHERE name = '2Pac'));

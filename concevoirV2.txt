@@ -1,0 +1,31 @@
+dans ton terminale : =>
+=> sqlite3 moocademy.db 
+=> .mode column
+=> .headers on
+=> .tables
+
+CREATE TABLE `lessons` (
+`LessonId` INTEGER PRIMARY KEY AUTOINCREMENT, 
+`title` TEXT,
+`body` TEXT
+);
+
+CREATE TABLE `courses` (
+`CourseId` INTEGER PRIMARY KEY AUTOINCREMENT, 
+`title` TEXT,
+`description` TEXT,
+`LessonId` INTEGER
+);
+
+INSERT INTO lessons (title,body) VALUES ('math','lecon de math');
+INSERT INTO lessons (title,body) VALUES ('francais','lecon de francais');
+INSERT INTO lessons (title,body) VALUES ('physique','lecon de physique');
+INSERT INTO lessons (title,body) VALUES ('sport','lecon de sport');
+INSERT INTO lessons (title,body) VALUES ('anglais','lecon anglais');
+
+INSERT INTO courses (title,description,LessonId) VALUES ('Mr Brown','cours de Mr Brown', 1);
+INSERT INTO courses (title,description,LessonId) VALUES ('Mr Brown','cours de Mr Brown', 2);
+INSERT INTO courses (title,description,LessonId) VALUES ('Mr Brown','cours de Mr Brown', 4);
+
+INSERT INTO courses (title,description,LessonId) VALUES ('Mr Pink','cours de Mr Pink', 3);
+INSERT INTO courses (title,description,LessonId) VALUES ('Mr Pink','cours de Mr Pink', 5);
